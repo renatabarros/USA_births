@@ -1,5 +1,5 @@
 # Data on birth dates in the USA
-This Python code extracts the number of births on each day of the week from the following dataset:
+This Python script was made to analyse birth data from the following dataset:
 
 https://github.com/fivethirtyeight/data/tree/master/births
 
