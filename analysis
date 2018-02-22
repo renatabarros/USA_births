@@ -1,0 +1,74 @@
+# Opening the file
+f = open("births.csv","r")
+a = f.read()
+
+data = a.split("\n")
+
+all_data = []
+for rows in data:
+    row = rows.split(",")
+    all_data.append(row)
+
+# Getting rid of the first line (header)
+no_header_data = all_data[1:len(all_data)]
+
+# Creating and empty dictionary that will gather number of births per day of the week
+dictionary = {}
+ 
+for item in no_header_data:
+    day_of_week = item[3]
+    birth = item[4]
+    births = int(birth) # Essential step as the data in no_header_data is stored as strings
+    if day_of_week in dictionary:
+        dictionary[day_of_week] = dictionary[day_of_week] + births
+    else:
+        dictionary[day_of_week] = births
+
+# Returns the final results of day of week and total number of births
+dictionary
+
+# Defining a function that:
+# 1) Opens a data file
+# 2) Splits the strings on the newline character
+# 3) Excludes the header row
+# 4) Converts the dataset into a list of lists with integer values
+
+def read_csv(filename):
+    f = open(filename, "r")
+    a = f.read()
+    data = a.split("\n")
+    string_list = data[1:len(data)]
+    final_list = []
+    for row in string_list:
+        int_fields = []
+        string_fields = row.split(",")
+        for values in string_fields:
+            int_fields.append(int(values))
+        final_list.append(int_fields) # Be careful with the indentation! 
+    return final_list
+
+# Creating a dictionary with numbers of birth per month
+
+def month_births(input_list):
+    births_per_month = {}
+    for each in input_list:
+        month = each[1]
+        births = each[4]
+        if month in births_per_month:
+            births_per_month[month] = births_per_month[month] + births
+        else:
+            births_per_month[month] = births
+    return births_per_month
+
+# Creating a dictionary that calculate the number of births for any variable  (column)
+
+def calc_counts(data,column):
+    number_of_births = {}
+    for each in data:
+        column_value = each[column]
+        births = each[4]
+        if column_value in number_of_births:
+            number_of_births[column_value] = number_of_births[column_value] + births
+        else:
+            number_of_births[column_value] = births
+return number_of_births
